@@ -12,7 +12,7 @@ bash
 
 Copy code
 
-python git2textt.py /path/to/git/repository [-o /path/to/output_file.txt]
+python git2text.py /path/to/git/repository [-o /path/to/output_file.txt]
 
 After running this code, ChatGPT should be able to use the generated text file to process the contents of the Git repository.
 Git2Text
