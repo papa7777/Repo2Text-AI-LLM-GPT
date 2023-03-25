@@ -1,3 +1,13 @@
+#!/usr/bin/env python3
+
+"""
+Git2Text
+
+Converts the contents of a Git repository into a text format.
+
+(c) 2023 CCollective. Licensed under the GNU General Public License v3.0.
+"""
+
 import os
 import sys
 import fnmatch
@@ -32,7 +42,7 @@ def process_repository(repo_path, ignore_list, output_file):
 
 if __name__ == "__main__":
     if len(sys.argv) < 2:
-        print("Usage: python git_to_text.py /path/to/git/repository [-o /path/to/output_file.txt]")
+        print("Usage: python git2text.py /path/to/git/repository [-p /path/to/preamble.txt] [-o /path/to/output_file.txt]")
         sys.exit(1)
 
     repo_path = sys.argv[1]
@@ -45,15 +55,6 @@ if __name__ == "__main__":
         HERE = os.path.dirname(os.path.abspath(__file__))
         ignore_file_path = os.path.join(HERE, ".gptignore")
 
-    output_file_path = 'output.txt'
-    if "-o" in sys.argv:
-        output_file_path = sys.argv[sys.argv.index("-o") + 1]
-
-    if os.path.exists(ignore_file_path):
-        ignore_list = get_ignore_list(ignore_file_path)
-    else:
-        ignore_list = []
-
-    with open(output_file_path, 'w') as output_file:
-        process_repository(repo_path, ignore_list, output_file)
-    print(f"Repository contents written to {output_file_path}.")
+    preamble_file = None
+    if "-p" in sys.argv:
+        preamble_file = sys.argv
